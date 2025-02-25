@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Práctica 1: Follow Line
+title: Follow Line
 ---
 
 ## Captura de imágenes y preprocesado
