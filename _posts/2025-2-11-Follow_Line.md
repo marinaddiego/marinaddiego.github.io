@@ -20,8 +20,6 @@ El segundo punto que se prueba para el cálculo del error es el que corresponde 
 *Punto sobre el que se va a determinar el error para los controladores PID*
 
 ## Controlador PID
-El manejo del coche (en principio el giro del volante, y más adelante la velocidad lineal del coche) se realizará a través de un controlador PID, cuya expresión matemática es:
+El manejo del coche (en principio el giro del volante, y más adelante la velocidad lineal del coche) se realizará a través de un controlador PID. Así, se ha definido una función genérica que, en base a las tres constantes (proporcional, integral y derivativa), el error actual, el acumulado y el anterior, determina los nuevos valores de velocidad angular/lineal. Durante las diferentes pruebas se han ajustado los valores de las tres constantes hasta encontrar la combinación que proporciona unos mejora resultados. Para ello, se ha realizado primeramente el ajuste de la constante proporcional del controlador hasta que la oscilación del controlador es constante, a lo que le ha seguido el ajuste de la constante derivativa hasta que las oscilaciones quedan reducidas a lo mínimo posible. Finalmente, se ajusta la constante integral, si es necesario.
 
-$$u = -K_p \cdot e - K_i$$
-
-. Para ello, se ha programado una función que, en base a las tres constantes $k_p$, $k_i$ y $k_d$, el error actual, el error anterior y el error acumulado proporcione el nuevo valor de la velocidad angular/lineal del coche. 
+## Coche holonómico: velocidad lineal constante
