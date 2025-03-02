@@ -20,3 +20,8 @@ El segundo punto que se prueba para el cálculo del error es el que corresponde 
 *Punto sobre el que se va a determinar el error para los controladores PID*
 
 ## Controlador PID
+El manejo del coche (en principio el giro del volante, y más adelante la velocidad lineal del coche) se realizará a través de un controlador PID, cuya expresión matemática es:
+
+$$u = -K_p \cdot e - K_i$$
+
+. Para ello, se ha programado una función que, en base a las tres constantes $k_p$, $k_i$ y $k_d$, el error actual, el error anterior y el error acumulado proporcione el nuevo valor de la velocidad angular/lineal del coche. 
