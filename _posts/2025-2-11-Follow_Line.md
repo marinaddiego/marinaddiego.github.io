@@ -35,4 +35,12 @@ Una vez ya el coche es capaz de recorrer correctamente el circuito simple a una 
 
 <iframe width="740" height="473" src="https://www.youtube.com/embed/7MuRxSBSpG4?si=0VE3fD6hQrlsAkIL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-## Coche Ackermann
+## Coche con dinámica Ackermann
+Se comienzan las primeras pruebas con el coche con dinámica Ackermann. Lo primero que destaca de este, es que se trata de un coche mucho más "nervioso" que el holonómico y, por lo tanto, mucho más difícil de controlar. Así, la primera prueba que se va a realizar sobre este coche es tratar de realizar una vuelta al circuito simple.
+
+### Velocidad lineal constante
+En primer lugar, se pueba a realizar una vuelta completa al circuito simple con una velocidad constante y baja, usando las mismas técnicas que para el coche holonómico y ajustando los parámetros. Así, se trata de realizar una vuelta con una velocidad constante de 15. Sin embargo, el coche no consigue realizar la vuelta, debido al elevado grado de oscilación que presenta, chocándose contra las paredes e incluso dándose la vuelta por completo en varias ocasiones.
+
+Para conseguir que de la vuelta al circuito, aunque sea a baja velocidad, se prueba a usar dos velocidades constantes: una para las rectas de 15 y otra para las curvas de 5. Así, en función de la magnitud del error que se produce, se detecta si el coche se encuentra en una recta o en una curva y se aplica la velocidad correspondiente comentada. Con esto, el coche es capaz de dar la vuelta completa al circuito, sin embargo, el tiempo que le toma es de 268 segundos (4 minutos y 28 segundos), es decir, le toma demasiado tiempo. 
+
+### Velocidad lineal variable
