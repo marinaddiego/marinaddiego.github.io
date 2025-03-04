@@ -56,3 +56,11 @@ Para conseguir aumentar algo más la velocidad del coche e intentar que se reduz
 Se comienza estableciendo una velocidad máxima de 25 y una velocidad mínima de 7, velocidades lineales entre las que oscilará el coche a lo largo del circuito. además, para disminuir el nivel de oscilaciones respecto a la velocidad angular del coche, se reformula el error que se toma para el cálculo de la salida del controlador PID/PD de las velocidades angular y lineal, de manera que, en vez de tomarse directamente el error actual del coche, se toma como error el promedio de los últimos 5 errores. Este nuevo cálculo del error permite amortiguar las oscilaciones y, por lo tanto, mejorar la velocidad del coche. Adicionalmente, se limita el giro máximo del coche a un intervalo entre -0.5 y +0.5, de manera que las oscilaciones sean lo más suaves posibles sin limitar el movimiento del coche a través del circuito. Con esta solución, a penas reduce el tiempo de vuelta del circuito en 22 segundos, hasta dar la vuelta en un tiempo de 217.56 segundos, siguiendo siendo aún así un tiempo demasiado elevado. A esto, se le añade el problema de la gran cantidad de oscilaciones que se genera en el control del coche, tal y como se puede ver en el vídeo.
 
 <iframe width="740" height="473" src="https://www.youtube.com/embed/-R-06ukl2EM?si=4eNgkY-MMEmNsGD9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+### Solución final
+A pesar de que el coche con dinámica Ackermann es capaz de completar el circuito en menor tiempo en el caso de la velocidad variable, se decide tomar como solución final aquella en la que se aplicó una velocidad lineal constante al coche. Esto es así porque, además de que la diferencia de tiempos relativa no era muy elevada, el nivel de oscilaciones es menor en esta solución. Para este caso, se ha comprobado además que el coche es capaz de completar el resto de los circuitos propuestos.
+
+**Tiempo en otros circuitos**:
+* Montreal: 628.52 s
+* Montmelo: 332.98 s
+* Nurburgring: 265.10 s
