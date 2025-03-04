@@ -35,6 +35,11 @@ Una vez ya el coche es capaz de recorrer correctamente el circuito simple a una 
 
 <iframe width="740" height="473" src="https://www.youtube.com/embed/7MuRxSBSpG4?si=0VE3fD6hQrlsAkIL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
+*Tiempo en otros circuitos*:
+* Montreal: 172.80 s
+* Montmelo: 100.61 s
+* Nurburgring: 92.91 s
+
 ## Coche con dinámica Ackermann
 Se comienzan las primeras pruebas con el coche con dinámica Ackermann. Lo primero que destaca de este, es que se trata de un coche mucho más "nervioso" que el holonómico y, por lo tanto, mucho más difícil de controlar. Así, la primera prueba que se va a realizar sobre este coche es tratar de realizar una vuelta al circuito simple.
 
