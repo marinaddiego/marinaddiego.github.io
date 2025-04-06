@@ -26,10 +26,19 @@ Para cada punto detectado en la imagen izquierda:
 3. Se selecciona un punto adicional sobre la línea de visión del punto, y se proyectan ambos sobre la cámara derecha.
 4. Estos puntos se transforman nuevamente a coordenadas g´raficas, y con ellos se calcula la pendiente y la ordenada de la línea epipolar.
 
+![Línea epipolar]({{ site.baseurl }}/Images/epipolar_line.png)
+*Visualización de punto de interés en la imagen de la cámara izquierda (punto verde) y línea epipolar correspondiente sobre la imagen de la cámara derecha (línea roja).*
+
 Una vez generada la línea epipolar en la imagen derecha, se recorren los píxeles de dicha línea y se seleccionan únicamente aquellos que coinciden con píxeles marcados como bordes en la imagen derecha procesada con Canny. Estos puntos se consideran candidatos a correspondencia.
+
+![Puntos candidatos]({{ site.baseurl }}/Images/candidatos.png)
+*Visualización de los puntos candidatos a ser homólogos sobre la línea epipolar (puntos verdes sobre la línea epipolar roja).*
 
 ## Matching mediante correlación
 Para determinar cuál de estos candidatos es el verdadero punto homólogo al de la imagen izquierda, se utiliza un enfoque basado en la correlación sobre la franja epipolar:
-1. Se extrae una ventana de tamaño fijo (en este caso, 10x10 píxeles) centrada en el punto de interés de la imagen izquierda.
-2. Para cada punto candidato en la imagen derecha, se extrae una ventana de igual tamaño y se calcula la correlación normalizada entre ambas con *cv2.matchTemplate*.
+1. Se extrae una ventana de tamaño fijo (en este caso, 10x10 píxeles) centrada en el punto de interés de la imagen capturada por la cámara izquierda en escala de grises.
+2. Para cada punto candidato en la imagen derecha, se extrae una ventana de igual tamaño en la imagen capturada por la cámara derecha en escala de grises y se calcula la correlación normalizada entre ambas con *cv2.matchTemplate*.
 3. El punto con mayor correlación se considera el homólogo más probable.
+
+![Punto homólogo]({{ site.baseurl }}/Images/homologo.png)
+*Punto homólogo estimado sobre la imagen capturada por la cámara de la derecha*
