@@ -36,9 +36,33 @@ Una vez generada la línea epipolar en la imagen derecha, se recorren los píxel
 
 ## Matching mediante correlación
 Para determinar cuál de estos candidatos es el verdadero punto homólogo al de la imagen izquierda, se utiliza un enfoque basado en la correlación sobre la franja epipolar:
-1. Se extrae una ventana de tamaño fijo (en este caso, 10x10 píxeles) centrada en el punto de interés de la imagen capturada por la cámara izquierda en escala de grises.
+1. Se extrae una ventana de tamaño fijo (en este caso, 20x20 píxeles) centrada en el punto de interés de la imagen capturada por la cámara izquierda en escala de grises.
 2. Para cada punto candidato en la imagen derecha, se extrae una ventana de igual tamaño en la imagen capturada por la cámara derecha en escala de grises y se calcula la correlación normalizada entre ambas con *cv2.matchTemplate*.
 3. El punto con mayor correlación se considera el homólogo más probable.
 
 ![Punto homólogo]({{ site.baseurl }}/Images/homologo.png)
 *Punto homólogo estimado sobre la imagen capturada por la cámara de la derecha*
+
+## Triangulación
+Una vez identificado el punto homólogo en la imagen derecha mediante el proceso de correlación, se procede a calcular la posición tridimensional del punto observado por ambas cámaras. Para ello, primero se obtiene la dirección de los rayos de visión que pasan por ambos puntos (el original de la imagen izquierda y su homólogo en la imagen derecha). Esto se realiza mediante los siguientes pasos:
+1. Conversión de coordenadas gráficas a ópticas: las coordenadas del punto de máxima correlación en la imagen derecha se transforman a coordenadas ópticas.
+2. Retroproyección: se obtiene el punto 3D en la dirección del rayo proyectado desde la cámara derecha hacia el punto seleccionado en la imagen.
+3. Cálculo de vectores de proyección: para ambas cámaras (izquierda y derecha), se calcula el vector de dirección desde la posición de la cámara hasta el punto proyectado. Este vector representa la dirección del rayo que atraviesa el punto en cuestión.
+4. Normalización de los vectores: ambos vectores de proyección se normalizan para asegurar que su longitud no influya en los cálculos posteriores.
+Idealmente, los dos rayos proyectados desde cada cámara deberían encontrarse en un único punto del espacio 3D. Sin embargo, debido a errores de calibración, ruido en las imágenes o discretización, es poco probable que los rayos se crucen exactamente.
+Por esta razón, se calcula el punto más cercano entre las dos líneas, utilizando una solución basada en álgebra vectorial. El procedimiento es el siguiente:
+1. Producto vectorial de los vectores de proyección: se calcula el vector perpendicular al plano definido por los dos rayos, el cual se utilizará para determinar la distancia mínima entre ambas líneas.
+2. Parámetros de intersección: se resuelve un sistema que permite encontrar los parámetros t y u que definen los puntos más cercanos sobre cada línea (una desde la cámara izquierda y otra desde la derecha).
+3. Puntos más cercanos: se calculan los puntos 3D individuales sobre cada rayo, y luego se promedia su posición para obtener el punto triangulado.
+4. Para aportar realismo y coherencia visual a la nube de puntos generada, se asigna un color al punto 3D. Este color se obtiene directamente del píxel correspondiente en la imagen izquierda (aunque también se puede considerar una media entre ambas cámaras). Esto permite visualizar la escena con información fotométrica además de geométrica.
+
+Finalmente, el punto reconstruido se añade a la escena mediante la función ``GUI.ShowNewPoints``, lo que permite su representación visual en el entorno virtual del simulador.
+
+## Resultados
+El resultado de la reconstrucción tridimensional de la escena se puede comprobar en el siguiente vídeo:
+
+<iframe width="740" height="473" src="https://www.youtube.com/embed/wMiUv4usiJU?si=AjbRa5B-V3QNhaGg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Se piede comprobar que se trata de una recpnstruccón muy densa, por lo que se ha modificado la solución para que se realice la reconstrucción en tan solo uno de cada diez puntos de interés, reduciendo en una gran cantidad el tiempo de reconstrucción, permitiendo aún así la distinción de los diferentes objetos de la escena.
+
+<iframe width="740" height="473" src="https://www.youtube.com/embed/6BmCFAGwdJ8?si=6I0bFCCKAKm3X7TQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
