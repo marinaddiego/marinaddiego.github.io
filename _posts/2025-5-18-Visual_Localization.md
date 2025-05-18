@@ -20,10 +20,13 @@ Esta transformación se extrae directamente de la información estática del YAM
 
 ### tag2tag_optical
 Los AprilTags tienen un sistema de coordenadas diferente al que usan las cámaras. De esta manera, para los AprilTags:
+
 * +X es horizontal
 * +Y es vertical
 * +Z sale hacia fuera
+
 Mientras que para la cámara:
+
 * +X apunta a la derecha
 * +Y apunta hacia abajo
 * +Z apunta hacia adelante
