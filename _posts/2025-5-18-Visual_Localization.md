@@ -9,6 +9,4 @@ El primer paso para conseguir la autolocalización del robot es la captura de la
 ## Estimación de la posición
 Para realizar la estimación de la posición, se ha implementado la siguiente transformación:
 
-$$
-world2robot = world2tag \cdot tag2optical_tag \cdot optical_tag2optical_cam \cdot optical_cam2cam \cdot cam2robot
-$$
+![image](https://github.com/user-attachments/assets/a810846f-5406-4765-ab92-9bc30155944d)
